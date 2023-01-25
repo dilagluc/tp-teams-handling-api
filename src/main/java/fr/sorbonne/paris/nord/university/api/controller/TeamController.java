@@ -1,4 +1,4 @@
-package fr.sorbonne.paris.nord.university.api.Controller;
+package fr.sorbonne.paris.nord.university.api.controller;
 
 import fr.sorbonne.paris.nord.university.api.dto.TeamDTO;
 import fr.sorbonne.paris.nord.university.api.service.TeamService;
