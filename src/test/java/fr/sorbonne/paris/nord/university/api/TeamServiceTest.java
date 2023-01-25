@@ -76,10 +76,10 @@ public class TeamServiceTest {
         team.setId(5L);
         team.setSlogan("Siwar Siwar Siwar");
         team.setName("Mazembé");
-        Mockito.when(repository.findById(Mockito.anyLong())).thenReturn(Optional.of(team)) ;
+        //Mockito.when(repository.findById(Mockito.anyLong())).thenReturn(Optional.of(team)) ;
         Mockito.when(repository.save(any(Team.class))).thenReturn(team);
         Mockito.when(mapper.map(Mockito.any(Team.class))).thenReturn(TeamDTO.builder().id((team.getId())).name(team.getName()).slogan(team.getSlogan()).build());
-        TeamDTO actual = service.updateTeam(mapper.map(team));
+        TeamDTO actual = service.addTeam(mapper.map(team));
         assertNotNull(actual);
         assertEquals("Mazembé", actual.getName());
     }
