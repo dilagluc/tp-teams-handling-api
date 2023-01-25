@@ -1,14 +1,13 @@
 package fr.sorbonne.paris.nord.university.api.Controller;
 
-import fr.sorbonne.paris.nord.university.api.entity.Team;
+import fr.sorbonne.paris.nord.university.api.dto.TeamDTO;
 import fr.sorbonne.paris.nord.university.api.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class TeamController {
     private TeamService teamService;
 
@@ -17,40 +16,63 @@ public class TeamController {
         this.teamService = teamService;
     }
 
-    @GetMapping("/all")
-    public List<Team> getallTeam()
+    @GetMapping("/team")
+    public List<TeamDTO> getAllTeam()
+    {
+        return teamService.allTeam();
+    }
+    @GetMapping("/team/{id}")
+    public TeamDTO getById( @PathVariable String id)
+    {
+        return teamService.getTeamById(Long.valueOf(id));
+    }
+
+    @PostMapping("/team")
+    public void addTeam(@RequestBody TeamDTO teamdto)
+    {
+        teamService.addTeam(teamdto);
+    }
+
+    @PutMapping("/team")
+    public void updateTeam(@RequestBody TeamDTO teamdto)
+    {
+        teamService.updateTeam(teamdto);
+    }
+
+    @DeleteMapping("/team/{id}")
+    public void deleteTeamById ( @PathVariable String id)
+    {
+        teamService.deleteTeamById(Long.valueOf(id));
+    }
+
+    /*@GetMapping("/all")
+    public List<TeamDTO> getAllTeam()
     {
         return teamService.allTeam();
     }
     @GetMapping("/team")
-    public Team getById(@RequestParam("id") Long id)
+
+    public TeamDTO getById(@RequestParam("id") Long id)
     {
         return teamService.getTeamById(id);
     }
 
     @PostMapping("/add")
-    public void addTeam(@RequestBody Team team)
+    public void addTeam(@RequestBody TeamDTO teamdto)
     {
-        Team t = new Team();
-        t.setName(team.getName());
-        t.setSlogan(team.getSlogan());
-        teamService.addTeam(t);
+        teamService.addTeam(teamdto);
     }
 
     @PutMapping("/update")
-    public void updateTeam(@RequestBody Team team)
+    public void updateTeam(@RequestBody TeamDTO teamdto)
     {
-        Team t = new Team();
-        t.setId(team.getId());
-        t.setName(team.getName());
-        t.setSlogan(team.getSlogan());
-        teamService.updateTeam(t);
+        teamService.updateTeam(teamdto);
     }
 
     @DeleteMapping("/team")
     public void deleteTeamById (@RequestParam("id") Long id)
     {
         teamService.deleteTeamById(id);
-    }
+    }*/
 
 }
